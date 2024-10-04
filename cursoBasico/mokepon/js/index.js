@@ -9,6 +9,9 @@ const mensajes = document.querySelector('#mensajes');
 const vidasJugador = document.querySelector('#vidas-jugador');
 const vidasEnemigo = document.querySelector('#vidas-enemigo');
 const botonReiniciar = document.querySelector('#boton-reiniciar');
+const sectionSeleccionarAtaque = document.querySelector('#seleccionar-ataque');
+const sectionReiniciar = document.querySelector('#reiniciar');
+const sectionSeleccionarMascota = document.querySelector('#seleccionar-mascota');
 const parrafo = document.createElement('p');
 
 let ataqueJugador;
@@ -46,6 +49,10 @@ const seleccionarMascota = () => {
   }
 
   seleccionarMascotaEnemigo();
+
+  sectionSeleccionarMascota.style.display = 'none';
+  sectionSeleccionarAtaque.style.display = 'block';
+
 };
 
 const combate = () => {
@@ -78,6 +85,8 @@ const pararJuego = () => {
   botonFuego.disabled = true;
   botonTierra.removeEventListener('click', ataqueTierra);
   botonTierra.disabled = true;
+
+  sectionReiniciar.style.display = 'block';
 }
 
 const crearMensaje = () => {
@@ -137,6 +146,9 @@ const reiniciarJuego = () => {
 }
 
 const iniciarJuego = () => {
+  sectionSeleccionarAtaque.style.display = 'none';
+  sectionReiniciar.style.display = 'none';
+
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);
 
