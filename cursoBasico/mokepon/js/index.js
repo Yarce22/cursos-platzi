@@ -8,6 +8,7 @@ const botonTierra = document.querySelector('#boton-tierra');
 const mensajes = document.querySelector('#mensajes');
 const vidasJugador = document.querySelector('#vidas-jugador');
 const vidasEnemigo = document.querySelector('#vidas-enemigo');
+const botonReiniciar = document.querySelector('#boton-reiniciar');
 const parrafo = document.createElement('p');
 
 let ataqueJugador;
@@ -70,14 +71,25 @@ const combate = () => {
   }
 }
 
+const pararJuego = () => {
+  botonAgua.removeEventListener('click', ataqueAgua);
+  botonAgua.disabled = true;
+  botonFuego.removeEventListener('click', ataqueFuego);
+  botonFuego.disabled = true;
+  botonTierra.removeEventListener('click', ataqueTierra);
+  botonTierra.disabled = true;
+}
+
 const crearMensaje = () => {
   parrafo.innerText = `${spanMascotaJugador.innerHTML} ataca con ${ataqueJugador}, ${spanMascotaEnemigo.innerHTML} ataco con ${ataqueEnemigo} - ${combate()}!`;
   mensajes.appendChild(parrafo);
 
   if (vidasJugador.innerHTML == 0) {
-    parrafo.innerText = `EL GANADOR ES ${spanMascotaEnemigo.innerHTML}!`;
+    parrafo.innerText = `EL GANADOR ES ${spanMascotaEnemigo.innerHTML.toUpperCase()}!`;
+    pararJuego();
   } else if (vidasEnemigo.innerHTML == 0) {
-    parrafo.innerText = `EL GANADOR ES ${spanMascotaJugador.innerHTML}!`;
+    parrafo.innerText = `EL GANADOR ES ${spanMascotaJugador.innerHTML.toUpperCase()}!`;
+    pararJuego();
   }
 }
 
@@ -120,6 +132,10 @@ const ataqueTierra = () => {
   crearMensaje();
 }
 
+const reiniciarJuego = () => {
+  location.reload();
+}
+
 const iniciarJuego = () => {
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);
@@ -127,6 +143,7 @@ const iniciarJuego = () => {
   botonAgua.addEventListener('click', ataqueAgua);
   botonFuego.addEventListener('click', ataqueFuego);
   botonTierra.addEventListener('click', ataqueTierra);
+  botonReiniciar.addEventListener('click', reiniciarJuego); 
 };
 
 window.addEventListener('load', iniciarJuego);
