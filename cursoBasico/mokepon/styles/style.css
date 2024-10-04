@@ -1,14 +1,64 @@
-#titulo {
-  color: lightcoral;
-  width: 310px;
-  height: 50px;
-  background-color: aquamarine;
-  margin: 0 auto;
+*{
+  box-sizing: border-box;
 }
 
-#seleccionar-mascota {
+body {
+  font-family: 'Fredoka', cursive;
+  background-color: #041562;
+}
+
+.seleccionar-mascota {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.titulo {
+  font-size: 32px;
+  color: #EAD8B1;
+}
+
+.subtitulo {
+  color:#EAD8B1;
+  font-size: 24px;
+}
+
+.tarjetas {
+  display: flex;
+  gap: 10px;
+}
+
+.tarjetas input {
+  display: none;
+}
+
+.tarjetaMokepon {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 160px;
+  height: 100px;
+  background-color: #3A6D8C;
+  border-radius: 20px;
+}
+
+.tarjetaMokepon img {
+  width: 80px;
+}
+
+#boton-mascota {
+  width: 180px;
+  height: 40px;
+  margin-top: 20px;
+  font-family: 'Fredoka', cursive;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 20px;
+  color: #041562;
+  background-color: #EAD8B1;
+}
+
+#boton-mascota:hover {
+  cursor: pointer;
 }
