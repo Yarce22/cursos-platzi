@@ -5,7 +5,9 @@ const spanMascotaEnemigo = document.querySelector('#mascota-enemigo');
 const botonFuego = document.querySelector('#boton-fuego');
 const botonAgua = document.querySelector('#boton-agua');
 const botonTierra = document.querySelector('#boton-tierra');
-const mensajes = document.querySelector('#mensajes');
+const mensajes = document.querySelector('#resultado');
+const divAtaqueJugador = document.querySelector('#ataque-del-jugador');
+const divAtaqueEnemigo = document.querySelector('#ataque-del-enemigo');
 const vidasJugador = document.querySelector('#vidas-jugador');
 const vidasEnemigo = document.querySelector('#vidas-enemigo');
 const botonReiniciar = document.querySelector('#boton-reiniciar');
@@ -15,7 +17,10 @@ const sectionSeleccionarMascota = document.querySelector('.seleccionar-mascota')
 const labelTarjetaMokeponHipodoge = document.querySelector('#tarjetaMokepon-hipodoge');
 const labelTarjetaMokeponCapipepo = document.querySelector('#tarjetaMokepon-capipepo');
 const labelTarjetaMokeponRatigueya = document.querySelector('#tarjetaMokepon-ratigueya');
-const parrafo = document.createElement('p');
+const sectionVidas = document.querySelector('#section-vidas');
+const divBotonesAtaque = document.querySelector('#botones-ataque');
+const subtitulo = document.querySelector('#subtitulo-ataque');
+
 
 let ataqueJugador;
 let ataqueEnemigo;
@@ -55,30 +60,31 @@ const seleccionarMascota = () => {
   seleccionarMascotaEnemigo();
 
   sectionSeleccionarMascota.style.display = 'none';
-  sectionSeleccionarAtaque.style.display = 'block';
+  sectionSeleccionarAtaque.style.display = 'flex';
+  sectionVidas.style.display = 'flex';
 
 };
 
 const combate = () => {
   if (ataqueJugador === ataqueEnemigo) {
     alert('EMPATE!');
-    return 'EMPATE!';
+    return 'EMPATE 🙅‍♂️';
   } else if (ataqueJugador === 'FUEGO' && ataqueEnemigo === 'TIERRA') {
     alert('GANASTE!');
     vidasEnemigo.innerHTML -= 1;
-    return 'GANASTE!';
+    return 'GANASTE 🎉';
   } else if (ataqueJugador === 'AGUA' && ataqueEnemigo === 'FUEGO') {
     alert('GANASTE!');
     vidasEnemigo.innerHTML -= 1;
-    return 'GANASTE!';
+    return 'GANASTE 🎉';
   } else if (ataqueJugador === 'TIERRA' && ataqueEnemigo === 'AGUA') {
     alert('GANASTE!');
     vidasEnemigo.innerHTML -= 1;
-    return 'GANASTE!';
+    return 'GANASTE 🎉';
   } else {
     alert('PERDISTE!');
     vidasJugador.innerHTML -= 1;
-    return 'PERDISTE!';
+    return 'PERDISTE ❌';
   }
 }
 
@@ -90,18 +96,28 @@ const pararJuego = () => {
   botonTierra.removeEventListener('click', ataqueTierra);
   botonTierra.disabled = true;
 
-  sectionReiniciar.style.display = 'block';
+  subtitulo.style.display = 'none';
+  divBotonesAtaque.style.display = 'none';
+  sectionReiniciar.style.display = 'flex';
 }
 
 const crearMensaje = () => {
-  parrafo.innerText = `${spanMascotaJugador.innerHTML} ataca con ${ataqueJugador}, ${spanMascotaEnemigo.innerHTML} ataco con ${ataqueEnemigo} - ${combate()}!`;
-  mensajes.appendChild(parrafo);
+  mensajes.innerHTML = combate();
+  const nuevoAtaqueDelJugador = document.createElement('p');
+  const nuevoAtaqueDelEnemigo = document.createElement('p');
+
+  nuevoAtaqueDelJugador.innerHTML = `${spanMascotaJugador.innerHTML} ataca con ${ataqueJugador}.`;
+  nuevoAtaqueDelEnemigo.innerHTML = `${spanMascotaEnemigo.innerHTML} ataca con ${ataqueEnemigo}.`;
+
+  divAtaqueJugador.appendChild(nuevoAtaqueDelJugador);
+  divAtaqueEnemigo.appendChild(nuevoAtaqueDelEnemigo);
+
 
   if (vidasJugador.innerHTML == 0) {
-    parrafo.innerText = `EL GANADOR ES ${spanMascotaEnemigo.innerHTML.toUpperCase()}!`;
+    mensajes.innerText = `EL GANADOR ES EL ENEMIGO CON ${spanMascotaEnemigo.innerHTML.toUpperCase()}!`;
     pararJuego();
   } else if (vidasEnemigo.innerHTML == 0) {
-    parrafo.innerText = `EL GANADOR ES ${spanMascotaJugador.innerHTML.toUpperCase()}!`;
+    mensajes.innerText = `EL GANADOR ES JUGADOR CON ${spanMascotaJugador.innerHTML.toUpperCase()}!`;
     pararJuego();
   }
 }
@@ -152,6 +168,7 @@ const reiniciarJuego = () => {
 const iniciarJuego = () => {
   sectionSeleccionarAtaque.style.display = 'none';
   sectionReiniciar.style.display = 'none';
+  sectionVidas.style.display = 'none';
 
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);

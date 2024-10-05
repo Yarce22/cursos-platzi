@@ -47,7 +47,7 @@ body {
   width: 80px;
 }
 
-#boton-mascota {
+#boton-mascota, .boton-ataque, #boton-reiniciar {
   width: 180px;
   height: 40px;
   margin-top: 20px;
@@ -61,4 +61,32 @@ body {
 
 #boton-mascota:hover {
   cursor: pointer;
+}
+
+#seleccionar-ataque {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#boton-reiniciar {
+  margin: 0 auto;
+}
+
+#section-vidas {
+  margin: 25px 0;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#mensajes {
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: auto;
+  padding: 10px;
+  color: #EAD8B1;
+  border: 2px solid #EAD8B1;
+  border-radius: 25px;
+  background-color: #6A9AB0;
 }
