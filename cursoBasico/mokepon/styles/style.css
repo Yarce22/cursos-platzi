@@ -74,14 +74,17 @@ body {
 }
 
 #section-vidas {
-  margin: 25px 0;
-  justify-content: space-evenly;
-  align-items: center;
+  max-width: 700px;
+  margin: 25px auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  gap: 10px;
 }
 
 #mensajes {
   display: grid;
   place-items: center;
+  text-align: center;
   width: 150px;
   height: auto;
   padding: 10px;
@@ -89,4 +92,35 @@ body {
   border: 2px solid #EAD8B1;
   border-radius: 25px;
   background-color: #6A9AB0;
+}
+
+#ataque-del-jugador, #ataque-del-enemigo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px;
+  color: #041562;
+  border: 2px solid #EAD8B1;
+  border-radius: 25px;
+  background-color: #3A6D8C;
+}
+
+#ataque-del-jugador :nth-child(1), #ataque-del-enemigo :nth-child(1) {
+  font-weight: bold;
+  color: #EAD8B1;
+}
+
+@media (max-width: 426px) {
+  .tarjetas {
+    flex-direction: column;
+  }
+
+  #botones-ataque {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #mensajes {
+    width: 100px;
+  }
 }

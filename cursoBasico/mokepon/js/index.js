@@ -61,7 +61,7 @@ const seleccionarMascota = () => {
 
   sectionSeleccionarMascota.style.display = 'none';
   sectionSeleccionarAtaque.style.display = 'flex';
-  sectionVidas.style.display = 'flex';
+  sectionVidas.style.display = 'grid';
 
 };
 
