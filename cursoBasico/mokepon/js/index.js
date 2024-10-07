@@ -15,19 +15,18 @@ const botonReiniciar = document.querySelector('#boton-reiniciar');
 const sectionSeleccionarAtaque = document.querySelector('#seleccionar-ataque');
 const sectionReiniciar = document.querySelector('#reiniciar');
 const sectionSeleccionarMascota = document.querySelector('.seleccionar-mascota');
-const labelTarjetaMokeponHipodoge = document.querySelector('#tarjetaMokepon-hipodoge');
-const labelTarjetaMokeponCapipepo = document.querySelector('#tarjetaMokepon-capipepo');
-const labelTarjetaMokeponRatigueya = document.querySelector('#tarjetaMokepon-ratigueya');
 const sectionVidas = document.querySelector('#section-vidas');
 const divBotonesAtaque = document.querySelector('#botones-ataque');
 const subtitulo = document.querySelector('#subtitulo-ataque');
 const imgMascotaJugador = document.querySelector('#img-mascota-jugador');
 const imgMascotaEnemigo = document.querySelector('#img-mascota-enemigo');
+const contenedorTarjetas = document.querySelector('#contenedor-tarjetas');
 
 const mokepones = [];
 
 let ataqueJugador;
 let ataqueEnemigo;
+let opcionDeMokepones;
 
 const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp'
 const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp'
@@ -58,7 +57,7 @@ capipepo.ataques.push(
   {nombre: 'Arañazos 🐾', id: 'boton-tierra'},
 )
 
-let ratigueya = new Mokepon ('Hipodoge', urlImgRatigueya, 3);
+let ratigueya = new Mokepon ('Ratigueya', urlImgRatigueya, 3);
 ratigueya.ataques.push(
   {nombre: 'Latigazo 🔥', id: 'boton-fuego'},
   {nombre: 'Lluvia de fuego 🔥', id: 'boton-fuego'},
@@ -215,24 +214,19 @@ const iniciarJuego = () => {
   sectionReiniciar.style.display = 'none';
   sectionVidas.style.display = 'none';
 
+  mokepones.forEach((mokepon) => {
+    opcionDeMokepones = `
+    <input type="radio" name="mascota" checked id=${mokepon.nombre.toLocaleLowerCase()}>
+    <label for=${mokepon.nombre} id="tarjetaMokepon-${mokepon.nombre.toLocaleLowerCase()}" class="tarjetaMokepon">
+        <p>Hipodoge</p>
+        <img src=${mokepon.foto} alt=${mokepon.nombre}>
+    </label>
+    `
+    contenedorTarjetas.innerHTML += opcionDeMokepones;
+  })
+
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);
-
-  labelTarjetaMokeponHipodoge.addEventListener('click', () => {
-    labelTarjetaMokeponHipodoge.style.border = 'solid #EAD8B1';
-    labelTarjetaMokeponCapipepo.style.border = 'none';
-    labelTarjetaMokeponRatigueya.style.border = 'none';
-  })
-  labelTarjetaMokeponCapipepo.addEventListener('click', () => {
-    labelTarjetaMokeponHipodoge.style.border = 'none';
-    labelTarjetaMokeponCapipepo.style.border = 'solid #EAD8B1';
-    labelTarjetaMokeponRatigueya.style.border = 'none';
-  })
-  labelTarjetaMokeponRatigueya.addEventListener('click', () => {
-    labelTarjetaMokeponHipodoge.style.border = 'none';
-    labelTarjetaMokeponCapipepo.style.border = 'none';
-    labelTarjetaMokeponRatigueya.style.border = 'solid #EAD8B1';
-  })
 
   botonAgua.addEventListener('click', ataqueAgua);
   botonFuego.addEventListener('click', ataqueFuego);
