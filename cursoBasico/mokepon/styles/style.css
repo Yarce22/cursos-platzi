@@ -35,10 +35,12 @@ body {
 
 .tarjetaMokepon {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 10px;
   width: 160px;
-  height: 100px;
+  height: auto;
+  font-weight: bold;
   background-color: #3A6D8C;
   border-radius: 20px;
 }
@@ -96,6 +98,8 @@ body {
 
 #ataque-del-jugador, #ataque-del-enemigo {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   text-align: center;
   padding: 10px;
@@ -108,6 +112,10 @@ body {
 #ataque-del-jugador :nth-child(1), #ataque-del-enemigo :nth-child(1) {
   font-weight: bold;
   color: #EAD8B1;
+}
+
+.mascota-img {
+  width: 100px;
 }
 
 @media (max-width: 426px) {
