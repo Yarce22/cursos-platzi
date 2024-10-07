@@ -38,12 +38,33 @@ class Mokepon {
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
+    this.ataques = [];
   }
 };
 
 let hipodoge = new Mokepon ('Hipodoge', urlImgHipodoge, 3);
+hipodoge.ataques.push(
+  {nombre: 'Pistola de agua 💧', id: 'boton-agua'},
+  {nombre: 'Hidrobomba 💧', id: 'boton-agua'},
+  {nombre: 'Burbujas 💧', id: 'boton-agua'},
+  {nombre: 'Arañazos 🐾', id: 'boton-agua'},
+)
+
 let capipepo = new Mokepon ('Capipepo', urlImgCapipepo, 3);
+capipepo.ataques.push(
+  {nombre: 'Latigazo 🌿', id: 'boton-tierra'},
+  {nombre: 'Esporas 🌿', id: 'boton-tierra'},
+  {nombre: 'Bajo tierra 🌿', id: 'boton-tierra'},
+  {nombre: 'Arañazos 🐾', id: 'boton-tierra'},
+)
+
 let ratigueya = new Mokepon ('Hipodoge', urlImgRatigueya, 3);
+ratigueya.ataques.push(
+  {nombre: 'Latigazo 🔥', id: 'boton-fuego'},
+  {nombre: 'Lluvia de fuego 🔥', id: 'boton-fuego'},
+  {nombre: 'Coletazo 🐾', id: 'boton-fuego'},
+  {nombre: 'Arañazos 🐾', id: 'boton-fuego'},
+)
 
 mokepones.push(hipodoge, capipepo, ratigueya);
 
