@@ -1,6 +1,4 @@
-const inputHipodoge = document.querySelector('#hipodoge');
-const inputCapipepo = document.querySelector('#capipepo');
-const inputRatigueya = document.querySelector('#ratigueya');
+
 const spanMascotaJugador = document.querySelector('#mascota-jugador');
 const spanMascotaEnemigo = document.querySelector('#mascota-enemigo');
 const botonFuego = document.querySelector('#boton-fuego');
@@ -27,6 +25,9 @@ const mokepones = [];
 let ataqueJugador;
 let ataqueEnemigo;
 let opcionDeMokepones;
+let inputHipodoge;
+let inputCapipepo; 
+let inputRatigueya;
 
 const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp'
 const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp'
@@ -216,15 +217,19 @@ const iniciarJuego = () => {
 
   mokepones.forEach((mokepon) => {
     opcionDeMokepones = `
-    <input type="radio" name="mascota" checked id=${mokepon.nombre.toLocaleLowerCase()}>
-    <label for=${mokepon.nombre} id="tarjetaMokepon-${mokepon.nombre.toLocaleLowerCase()}" class="tarjetaMokepon">
-        <p>Hipodoge</p>
+    <input type="radio" name="mascota" id=${mokepon.nombre.toLocaleLowerCase()}>
+    <label for=${mokepon.nombre.toLocaleLowerCase()} id="tarjetaMokepon-${mokepon.nombre.toLocaleLowerCase()}" class="tarjetaMokepon">
+        <p>${mokepon.nombre}</p>
         <img src=${mokepon.foto} alt=${mokepon.nombre}>
     </label>
     `
     contenedorTarjetas.innerHTML += opcionDeMokepones;
   })
-
+  
+  inputHipodoge = document.querySelector('#hipodoge');
+  inputCapipepo = document.querySelector('#capipepo');
+  inputRatigueya = document.querySelector('#ratigueya');
+  
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);
 

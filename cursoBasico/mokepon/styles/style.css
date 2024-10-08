@@ -33,6 +33,10 @@ body {
   display: none;
 }
 
+input:checked + label {
+  border: 3px solid #EAD8B1;
+}
+
 .tarjetaMokepon {
   display: flex;
   flex-direction: column;
@@ -41,6 +45,7 @@ body {
   width: 160px;
   height: auto;
   font-weight: bold;
+  color: #041562;
   background-color: #3A6D8C;
   border-radius: 20px;
 }
@@ -61,7 +66,7 @@ body {
   background-color: #EAD8B1;
 }
 
-#boton-mascota:hover {
+#boton-mascota:hover,  .boton-ataque:hover, #boton-reiniciar:hover, label:hover {
   cursor: pointer;
 }
 
