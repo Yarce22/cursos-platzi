@@ -76,6 +76,17 @@ input:checked + label {
   align-items: center;
 }
 
+#botones-ataque {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1f;
+  gap: 10px;
+}
+
+.boton-ataque {
+  margin: 0;
+}
+
 #boton-reiniciar {
   margin: 0 auto;
 }
