@@ -261,7 +261,10 @@ const iniciarJuego = () => {
   let botonMascota = document.querySelector('#boton-mascota');
   botonMascota.addEventListener('click', seleccionarMascota);
 
-  botonReiniciar.addEventListener('click', reiniciarJuego); 
+  botonReiniciar.addEventListener('click', reiniciarJuego);
+
+  window.addEventListener('keydown', moverMokepon);
+  window.addEventListener('keyup', detenerMovimiento)
 };
 
 const moverArriba = () => {
@@ -280,6 +283,33 @@ const moverDerecha = () => {
 const detenerMovimiento = () => {
   mascotaJugador.velocidadX = 0
   mascotaJugador.velocidadY = 0
+}
+
+const moverMokepon = (e) => {
+  switch (e.key) {
+    case 'w':
+    case 'W':
+    case 'ArrowUp':
+      moverArriba();      
+      break;
+    case 'a':
+    case 'A':
+    case 'ArrowLeft':
+      moverIzquierda();      
+      break;
+    case 's':
+    case 'S':
+    case 'ArrowDown':
+      moverAbajo();      
+      break;
+    case 'd':
+    case 'D':
+    case 'ArrowRight':
+      moverDerecha();      
+      break;
+    default:
+      break;
+  }
 }
 
 window.addEventListener('load', iniciarJuego);
