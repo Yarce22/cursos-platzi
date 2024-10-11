@@ -54,7 +54,7 @@ input:checked + label {
   width: 80px;
 }
 
-#boton-mascota, .boton-ataque, #boton-reiniciar {
+#boton-mascota, .btnMover, #boton-reiniciar {
   width: 180px;
   height: 40px;
   margin-top: 20px;
@@ -132,6 +132,50 @@ input:checked + label {
 
 .mascota-img {
   width: 100px;
+}
+
+#ver-mapa {
+  flex-direction: column;
+  place-items: center;
+}
+
+#mapa {
+  border: 2px solid #EAD8B1;
+}
+
+#btns-mover {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "arriba arriba arriba"
+    "izquierda abajo derecha"
+}
+
+#mover-arriba {
+  grid-area: arriba;
+  width: 100px;
+  margin-top: 20px;
+}
+
+#mover-izquierda {
+  grid-area: izquierda;
+  width: 100px;
+  margin-top: 0;
+}
+
+#mover-abajo {
+  grid-area: abajo;
+  width: 100px;
+  margin-top: 0;
+}
+
+#mover-derecha {
+  grid-area: derecha;
+  width: 100px;
+  margin-top: 0;
 }
 
 @media (max-width: 426px) {

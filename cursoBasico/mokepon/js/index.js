@@ -16,6 +16,8 @@ const subtitulo = document.querySelector('#subtitulo-ataque');
 const imgMascotaJugador = document.querySelector('#img-mascota-jugador');
 const imgMascotaEnemigo = document.querySelector('#img-mascota-enemigo');
 const contenedorTarjetas = document.querySelector('#contenedor-tarjetas');
+const sectionVerMapa = document.querySelector('#ver-mapa');
+const mapa = document.querySelector('#mapa');
 
 const mokepones = [];
 
@@ -26,6 +28,8 @@ let inputHipodoge;
 let inputCapipepo; 
 let inputRatigueya;
 let mascotaJugador;
+let lienzo = mapa.getContext('2d');
+let intervalo;
 
 const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp'
 const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp'
@@ -37,6 +41,14 @@ class Mokepon {
     this.foto = foto;
     this.vida = vida;
     this.ataques = [];
+    this.x = 20;
+    this.y = 30;
+    this.ancho = 80;
+    this.alto = 80;
+    this.mapaFoto = new Image();
+    this.mapaFoto.src = foto;
+    this.velocidadX = 0;
+    this.velocidadY = 0;
   }
 };
 
@@ -70,42 +82,50 @@ const aleatorio = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const imgMascota = (mascota, personaje) => {
-  if (mascota == 'Hipodoge') {
-    personaje.src = urlImgHipodoge;
-  } else if (mascota == 'Capipepo') {
-    personaje.src = urlImgCapipepo;
-  } else if (mascota == 'Ratigueya') {
-    personaje.src = urlImgRatigueya;
-  }
+const imgMascota = () => {
+  mascotaJugador.x += mascotaJugador.velocidadX;
+  mascotaJugador.y += mascotaJugador.velocidadY;
+  lienzo.clearRect(0, 0, mapa.clientWidth, mapa.height);
+  lienzo.drawImage(
+    mascotaJugador.mapaFoto,
+    mascotaJugador.x,
+    mascotaJugador.y,
+    mascotaJugador.ancho,
+    mascotaJugador.alto,
+  );
+
+  
 }
 
 const seleccionarMascotaEnemigo = () => {
   let mascotaAleatoria = aleatorio(0, mokepones.length - 1);
 
   spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre;
-  imgMascota(spanMascotaEnemigo.innerHTML, imgMascotaEnemigo);
 }
 
 const seleccionarMascota = () => {
   if (inputHipodoge.checked) {
     spanMascotaJugador.innerHTML = 'Hipodoge';
-    imgMascota(spanMascotaJugador.innerHTML, imgMascotaJugador);
+    mascotaJugador = hipodoge;
+    imgMascota();
   } else if (inputCapipepo.checked) {
     spanMascotaJugador.innerHTML = 'Capipepo';
-    imgMascota(spanMascotaJugador.innerHTML, imgMascotaJugador);
+    mascotaJugador = capipepo;
+    imgMascota();
   } else if (inputRatigueya.checked) {
     spanMascotaJugador.innerHTML = 'Ratigueya';
-    imgMascota(spanMascotaJugador.innerHTML, imgMascotaJugador);
+    mascotaJugador = ratigueya;
+    imgMascota();
   }
 
   seleccionarMascotaEnemigo();
   mostrarAtaques(spanMascotaJugador.innerHTML);
 
   sectionSeleccionarMascota.style.display = 'none';
-  sectionSeleccionarAtaque.style.display = 'flex';
-  sectionVidas.style.display = 'grid';
+  sectionVerMapa.style.display = 'flex'
+  sectionVidas.style.display = 'none';
 
+  intervalo = setInterval(imgMascota, 50)
 };
 
 const mostrarAtaques = (mascota) => {
@@ -221,6 +241,7 @@ const iniciarJuego = () => {
   sectionSeleccionarAtaque.style.display = 'none';
   sectionReiniciar.style.display = 'none';
   sectionVidas.style.display = 'none';
+  sectionVerMapa.style.display = 'none';
 
   mokepones.forEach((mokepon) => {
     opcionDeMokepones = `
@@ -242,5 +263,23 @@ const iniciarJuego = () => {
 
   botonReiniciar.addEventListener('click', reiniciarJuego); 
 };
+
+const moverArriba = () => {
+  mascotaJugador.velocidadY = -5
+}
+const moverIzquierda = () => {
+  mascotaJugador.velocidadX = -5
+}
+const moverAbajo = () => {
+  mascotaJugador.velocidadY = 5
+}
+const moverDerecha = () => {
+  mascotaJugador.velocidadX = 5
+}
+
+const detenerMovimiento = () => {
+  mascotaJugador.velocidadX = 0
+  mascotaJugador.velocidadY = 0
+}
 
 window.addEventListener('load', iniciarJuego);
