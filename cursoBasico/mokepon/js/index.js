@@ -30,29 +30,44 @@ let inputRatigueya;
 let mascotaJugador;
 let lienzo = mapa.getContext('2d');
 let intervalo;
+let mapaBg = new Image();
+mapaBg.src = './assets/mokemap-ca51ea18-7ac8-492f-be96-6181d766a99d.webp';
 
-const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp'
-const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp'
-const urlImgRatigueya = './assets/mokepons_mokepon_ratigueya_attack.webp'
+const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp';
+const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp';
+const urlImgRatigueya = './assets/mokepons_mokepon_ratigueya_attack.webp';
+const urlImgHipodogeHead = './assets/hipodoge.png';
+const urlImgCapipepoHead = './assets/capipepo-88af5708-65fd-4c17-b6ba-b8769612c301.webp';
+const urlImgRatigueyaHead = './assets/ratigueya-3d52f361-7036-4ff7-bf61-c4b7e49875ff.webp';
 
 class Mokepon {
-  constructor (nombre, foto, vida) {
+  constructor (nombre, foto, vida, fotoMapa, x = 340, y = 120) {
     this.nombre = nombre;
     this.foto = foto;
     this.vida = vida;
     this.ataques = [];
-    this.x = 20;
-    this.y = 30;
-    this.ancho = 80;
-    this.alto = 80;
+    this.x = x;
+    this.y = y;
+    this.ancho = 40;
+    this.alto = 40;
     this.mapaFoto = new Image();
-    this.mapaFoto.src = foto;
+    this.mapaFoto.src = fotoMapa;
     this.velocidadX = 0;
     this.velocidadY = 0;
   }
+
+  pintarMokepon() {
+    lienzo.drawImage(
+      this.mapaFoto,
+      this.x,
+      this.y,
+      this.ancho,
+      this.alto,
+    );
+  }
 };
 
-let hipodoge = new Mokepon ('Hipodoge', urlImgHipodoge, 3);
+let hipodoge = new Mokepon ('Hipodoge', urlImgHipodoge, 3, urlImgHipodogeHead);
 hipodoge.ataques.push(
   {nombre: 'Pistola de agua 💧', id: 'boton-agua', tipo: 'agua'},
   {nombre: 'Hidrobomba 💧', id: 'boton-agua', tipo: 'agua'},
@@ -60,7 +75,7 @@ hipodoge.ataques.push(
   {nombre: 'Golpe al suelo 🌿', id: 'boton-tierra', tipo: 'tierra'},
 )
 
-let capipepo = new Mokepon ('Capipepo', urlImgCapipepo, 3);
+let capipepo = new Mokepon ('Capipepo', urlImgCapipepo, 3, urlImgCapipepoHead);
 capipepo.ataques.push(
   {nombre: 'Latigazo 🌿', id: 'boton-tierra', tipo: 'tierra'},
   {nombre: 'Esporas 🌿', id: 'boton-tierra', tipo: 'tierra'},
@@ -68,7 +83,31 @@ capipepo.ataques.push(
   {nombre: 'Puños de agua 💧', id: 'boton-agua', tipo: 'agua'},
 )
 
-let ratigueya = new Mokepon ('Ratigueya', urlImgRatigueya, 3);
+let ratigueya = new Mokepon ('Ratigueya', urlImgRatigueya, 3, urlImgRatigueyaHead);
+ratigueya.ataques.push(
+  {nombre: 'Bomba de humo 🔥', id: 'boton-fuego'},
+  {nombre: 'Lluvia de fuego 🔥', id: 'boton-fuego'},
+  {nombre: 'Cola de acero 🌿', id: 'boton-tierra'},
+  {nombre: 'Arañazos 💧', id: 'boton-agua'},
+)
+
+let hipodogeEnemigo = new Mokepon ('Hipodoge', urlImgHipodoge, 3, urlImgHipodogeHead, 80, 200);
+hipodoge.ataques.push(
+  {nombre: 'Pistola de agua 💧', id: 'boton-agua', tipo: 'agua'},
+  {nombre: 'Hidrobomba 💧', id: 'boton-agua', tipo: 'agua'},
+  {nombre: 'lluvia ácida 🔥', id: 'boton-fuego', tipo: 'fuego'},
+  {nombre: 'Golpe al suelo 🌿', id: 'boton-tierra', tipo: 'tierra'},
+)
+
+let capipepoEnemigo = new Mokepon ('Capipepo', urlImgCapipepo, 3, urlImgCapipepoHead, 100, 85);
+capipepo.ataques.push(
+  {nombre: 'Latigazo 🌿', id: 'boton-tierra', tipo: 'tierra'},
+  {nombre: 'Esporas 🌿', id: 'boton-tierra', tipo: 'tierra'},
+  {nombre: 'Patadas ardientes 🔥', id: 'boton-fuego', tipo: 'fuego'},
+  {nombre: 'Puños de agua 💧', id: 'boton-agua', tipo: 'agua'},
+)
+
+let ratigueyaEnemigo = new Mokepon ('Ratigueya', urlImgRatigueya, 3, urlImgRatigueyaHead, 400, 250);
 ratigueya.ataques.push(
   {nombre: 'Bomba de humo 🔥', id: 'boton-fuego'},
   {nombre: 'Lluvia de fuego 🔥', id: 'boton-fuego'},
@@ -82,19 +121,22 @@ const aleatorio = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const imgMascota = () => {
+const pintarCanvas = () => {
   mascotaJugador.x += mascotaJugador.velocidadX;
   mascotaJugador.y += mascotaJugador.velocidadY;
   lienzo.clearRect(0, 0, mapa.clientWidth, mapa.height);
   lienzo.drawImage(
-    mascotaJugador.mapaFoto,
-    mascotaJugador.x,
-    mascotaJugador.y,
-    mascotaJugador.ancho,
-    mascotaJugador.alto,
-  );
+    mapaBg,
+    0,
+    0,
+    mapa.width,
+    mapa.height,
+  )
 
-  
+  mascotaJugador.pintarMokepon();
+  hipodogeEnemigo.pintarMokepon();
+  capipepoEnemigo.pintarMokepon();
+  ratigueyaEnemigo.pintarMokepon();
 }
 
 const seleccionarMascotaEnemigo = () => {
@@ -107,15 +149,15 @@ const seleccionarMascota = () => {
   if (inputHipodoge.checked) {
     spanMascotaJugador.innerHTML = 'Hipodoge';
     mascotaJugador = hipodoge;
-    imgMascota();
+    pintarCanvas();
   } else if (inputCapipepo.checked) {
     spanMascotaJugador.innerHTML = 'Capipepo';
     mascotaJugador = capipepo;
-    imgMascota();
+    pintarCanvas();
   } else if (inputRatigueya.checked) {
     spanMascotaJugador.innerHTML = 'Ratigueya';
     mascotaJugador = ratigueya;
-    imgMascota();
+    pintarCanvas();
   }
 
   seleccionarMascotaEnemigo();
@@ -125,7 +167,7 @@ const seleccionarMascota = () => {
   sectionVerMapa.style.display = 'flex'
   sectionVidas.style.display = 'none';
 
-  intervalo = setInterval(imgMascota, 50)
+  intervalo = setInterval(pintarCanvas, 50)
 };
 
 const mostrarAtaques = (mascota) => {
@@ -242,6 +284,9 @@ const iniciarJuego = () => {
   sectionReiniciar.style.display = 'none';
   sectionVidas.style.display = 'none';
   sectionVerMapa.style.display = 'none';
+
+  mapa.width = 500;
+  mapa.height = 350;
 
   mokepones.forEach((mokepon) => {
     opcionDeMokepones = `
