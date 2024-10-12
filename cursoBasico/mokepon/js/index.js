@@ -28,10 +28,18 @@ let inputHipodoge;
 let inputCapipepo; 
 let inputRatigueya;
 let mascotaJugador;
+let mascotaEnemigo;
 let lienzo = mapa.getContext('2d');
 let intervalo;
 let mapaBg = new Image();
 mapaBg.src = './assets/mokemap-ca51ea18-7ac8-492f-be96-6181d766a99d.webp';
+let alturaDelMapa;
+let anchoDelMapa = window.innerWidth - 20
+
+alturaDelMapa = anchoDelMapa * 600 / 800;
+
+mapa.width = anchoDelMapa;
+mapa.height = alturaDelMapa;
 
 const urlImgHipodoge = './assets/mokepons_mokepon_hipodoge_attack.webp';
 const urlImgCapipepo = './assets/mokepons_mokepon_capipepo_attack.webp';
@@ -91,24 +99,24 @@ ratigueya.ataques.push(
   {nombre: 'Arañazos 💧', id: 'boton-agua'},
 )
 
-let hipodogeEnemigo = new Mokepon ('Hipodoge', urlImgHipodoge, 3, urlImgHipodogeHead, 80, 200);
-hipodoge.ataques.push(
+let hipodogeEnemigo = new Mokepon ('Hipodoge Salvaje', urlImgHipodoge, 3, urlImgHipodogeHead, 80, 200);
+hipodogeEnemigo.ataques.push(
   {nombre: 'Pistola de agua 💧', id: 'boton-agua', tipo: 'agua'},
   {nombre: 'Hidrobomba 💧', id: 'boton-agua', tipo: 'agua'},
   {nombre: 'lluvia ácida 🔥', id: 'boton-fuego', tipo: 'fuego'},
   {nombre: 'Golpe al suelo 🌿', id: 'boton-tierra', tipo: 'tierra'},
 )
 
-let capipepoEnemigo = new Mokepon ('Capipepo', urlImgCapipepo, 3, urlImgCapipepoHead, 100, 85);
-capipepo.ataques.push(
+let capipepoEnemigo = new Mokepon ('Capipepo Salvaje', urlImgCapipepo, 3, urlImgCapipepoHead, 100, 85);
+capipepoEnemigo.ataques.push(
   {nombre: 'Latigazo 🌿', id: 'boton-tierra', tipo: 'tierra'},
   {nombre: 'Esporas 🌿', id: 'boton-tierra', tipo: 'tierra'},
   {nombre: 'Patadas ardientes 🔥', id: 'boton-fuego', tipo: 'fuego'},
   {nombre: 'Puños de agua 💧', id: 'boton-agua', tipo: 'agua'},
 )
 
-let ratigueyaEnemigo = new Mokepon ('Ratigueya', urlImgRatigueya, 3, urlImgRatigueyaHead, 400, 250);
-ratigueya.ataques.push(
+let ratigueyaEnemigo = new Mokepon ('Ratigueya Salvaje', urlImgRatigueya, 3, urlImgRatigueyaHead, 400, 250);
+ratigueyaEnemigo.ataques.push(
   {nombre: 'Bomba de humo 🔥', id: 'boton-fuego'},
   {nombre: 'Lluvia de fuego 🔥', id: 'boton-fuego'},
   {nombre: 'Cola de acero 🌿', id: 'boton-tierra'},
@@ -137,12 +145,19 @@ const pintarCanvas = () => {
   hipodogeEnemigo.pintarMokepon();
   capipepoEnemigo.pintarMokepon();
   ratigueyaEnemigo.pintarMokepon();
+
+  if (mascotaJugador.velocidadX !== 0 || mascotaJugador.velocidadY !== 0) {
+    revisarColision(hipodogeEnemigo);
+    revisarColision(capipepoEnemigo);
+    revisarColision(ratigueyaEnemigo);
+  }
 }
 
-const seleccionarMascotaEnemigo = () => {
-  let mascotaAleatoria = aleatorio(0, mokepones.length - 1);
-
-  spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre;
+const seleccionarMascotaEnemigo = (enemigo) => {
+  mascotaEnemigo = enemigo;
+  spanMascotaEnemigo.innerHTML = enemigo.nombre;
+  imgMascotaEnemigo.src = enemigo.foto;
+  imgMascotaJugador.src = mascotaJugador.foto;
 }
 
 const seleccionarMascota = () => {
@@ -160,7 +175,6 @@ const seleccionarMascota = () => {
     pintarCanvas();
   }
 
-  seleccionarMascotaEnemigo();
   mostrarAtaques(spanMascotaJugador.innerHTML);
 
   sectionSeleccionarMascota.style.display = 'none';
@@ -234,10 +248,10 @@ const crearMensaje = () => {
 
 
   if (vidasJugador.innerHTML == 0) {
-    mensajes.innerText = `EL GANADOR ES EL ENEMIGO CON ${spanMascotaEnemigo.innerHTML.toUpperCase()}!`;
+    mensajes.innerText = `EL GANADOR ES EL ${spanMascotaEnemigo.innerHTML.toUpperCase()}!`;
     pararJuego();
   } else if (vidasEnemigo.innerHTML == 0) {
-    mensajes.innerText = `EL GANADOR ES JUGADOR CON ${spanMascotaJugador.innerHTML.toUpperCase()}!`;
+    mensajes.innerText = `EL GANADOR ES ${spanMascotaJugador.innerHTML.toUpperCase()}!`;
     pararJuego();
   }
 }
@@ -355,6 +369,33 @@ const moverMokepon = (e) => {
     default:
       break;
   }
+}
+
+const revisarColision = (enemigo) => {
+  const arribaEnemigo = enemigo.y;
+  const abajoEnemigo = enemigo.y + enemigo.alto;
+  const derechaEnemigo = enemigo.x + enemigo.ancho;
+  const izquierdaEnemigo = enemigo.x;
+
+  const arribaMascota = mascotaJugador.y;
+  const abajoMascota = mascotaJugador.y + mascotaJugador.alto;
+  const derechaMascota = mascotaJugador.x + mascotaJugador.ancho;
+  const izquierdaMascota = mascotaJugador.x; 
+
+  if(
+      abajoMascota < arribaEnemigo ||
+      arribaMascota > abajoEnemigo ||
+      derechaMascota < izquierdaEnemigo || 
+      izquierdaMascota > derechaEnemigo
+  ) {
+    return;
+  }
+
+  detenerMovimiento();
+  sectionVerMapa.style.display = 'none'
+  sectionSeleccionarAtaque.style.display = 'flex';
+  sectionVidas.style.display = 'grid';
+  seleccionarMascotaEnemigo(enemigo);
 }
 
 window.addEventListener('load', iniciarJuego);
