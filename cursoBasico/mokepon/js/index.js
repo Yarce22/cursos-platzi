@@ -21,6 +21,7 @@ const mapa = document.querySelector('#mapa');
 
 const mokepones = [];
 
+let jugadorId = null;
 let ataqueJugador;
 let ataqueEnemigo;
 let opcionDeMokepones;
@@ -160,6 +161,18 @@ const seleccionarMascotaEnemigo = (enemigo) => {
   imgMascotaJugador.src = mascotaJugador.foto;
 }
 
+const seleccionarMokepon = (mokepon) => {
+  fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mokepon: mokepon
+    })
+  })
+}
+
 const seleccionarMascota = () => {
   if (inputHipodoge.checked) {
     spanMascotaJugador.innerHTML = 'Hipodoge';
@@ -174,6 +187,8 @@ const seleccionarMascota = () => {
     mascotaJugador = ratigueya;
     pintarCanvas();
   }
+
+  seleccionarMokepon(mascotaJugador)
 
   mostrarAtaques(spanMascotaJugador.innerHTML);
 
@@ -300,6 +315,7 @@ const unirseAlJuego = () => {
         res.text()
           .then((respuesta) => {
             console.log(respuesta)
+            jugadorId = respuesta
           })
       }
     })
