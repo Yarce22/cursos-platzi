@@ -293,6 +293,18 @@ const reiniciarJuego = () => {
   location.reload();
 }
 
+const unirseAlJuego = () => {
+  fetch('http://localhost:8080/unirse')
+    .then((res) => {
+      if (res.ok) {
+        res.text()
+          .then((respuesta) => {
+            console.log(respuesta)
+          })
+      }
+    })
+}
+
 const iniciarJuego = () => {
   sectionSeleccionarAtaque.style.display = 'none';
   sectionReiniciar.style.display = 'none';
@@ -311,6 +323,8 @@ const iniciarJuego = () => {
     </label>
     `
     contenedorTarjetas.innerHTML += opcionDeMokepones;
+
+    unirseAlJuego()
   })
   
   inputHipodoge = document.querySelector('#hipodoge');
