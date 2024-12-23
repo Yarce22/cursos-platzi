@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import './style.css'
 
 const TodoList = ({ children }) => {
   return (
-    <ul>
+    <ul className="TodoList">
       {children}
     </ul>
   )
