@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
 import './style.css'
+import { TodoContext } from '../../TodoContext'
+import { useContext } from 'react'
 
-const TodoSearch = ({ searchValue, setSearchValue }) => {
-
-  const inputText = (event) => {
-    setSearchValue(event.target.value)
-  }
-
+const TodoSearch = () => {
+  const { searchValue, inputText} = useContext(TodoContext)
   return (
     <input
-      placeholder="Cortar cebolla"
+      placeholder="Buscar ToDo"
       className="TodoSearch"
       value={searchValue}
       onChange={inputText}

@@ -3,7 +3,8 @@ import { FaCheck } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import './style.css'
 
-const TodoItem = ({text, completed, onComplete, onDelete}) => {
+const TodoItem = ({ text, completed, onComplete, onDelete }) => {
+
   return (
     <li className="TodoItem">
       <span

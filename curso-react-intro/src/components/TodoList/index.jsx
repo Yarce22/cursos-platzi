@@ -3,14 +3,16 @@ import './style.css'
 
 const TodoList = ({ children }) => {
   return (
-    <ul className="TodoList">
-      {children}
-    </ul>
+    <>
+      <ul className="TodoList">
+        {children}
+      </ul>
+    </>
   )
 }
 
 TodoList.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
 export { TodoList }

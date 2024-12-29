@@ -1,0 +1,13 @@
+.TodoList {
+  margin: 0;
+  padding: 0 0 56px 0;
+  list-style: none;
+}
+
+.TodoList-div {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 24px;
+  color: #a5a5a5;
+}
