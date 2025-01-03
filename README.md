@@ -6,4 +6,5 @@ Cursos y rutas
     
     FRONTEND
     
-    1.1. Curso Básico - Mokepon: https://mokepongameyarce22.netlify.app/
+    1. Curso intro React
+    https://todo-machine-yarce22.netlify.app
