@@ -1,14 +1,14 @@
+import { useContext } from 'react'
 import './style.css'
+import { TodoContext } from '../../TodoContext'
 
 const CreateTodoButton = () => {
-  const createToDo = () => {
-    console.log('diste click')
-  }
+  const { modalOpened } = useContext(TodoContext)
 
   return (
     <button
       className="CreateTodoButton"
-      onClick={createToDo}
+      onClick={modalOpened}
     >+</button>
   )
 }

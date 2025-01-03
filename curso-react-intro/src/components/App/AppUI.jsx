@@ -5,6 +5,8 @@ import { TodoList } from '../TodoList'
 import { TodoSearch } from '../TodoSearch'
 import { CreateTodoButton } from '../CreateTodoButton'
 import { TodoContext } from '../../TodoContext'
+import { Modal } from '../Modal'
+import { TodoForm } from '../TodoForm'
 import './App.css'
 
 const AppUI = () => {
@@ -14,7 +16,8 @@ const AppUI = () => {
     totalTodos,
     searchedTodos,
     todoCompleted,
-    todoDeleted
+    todoDeleted,
+    openModal,
   } = useContext(TodoContext)
 
   return (
@@ -38,6 +41,11 @@ const AppUI = () => {
         ))}
       </TodoList>
       <CreateTodoButton />
+      {openModal && (
+        <Modal>
+          <TodoForm />
+        </Modal>
+      )}
     </>
   )
 }

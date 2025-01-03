@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 
 const TodoContext = createContext()
 
+const localStorageInitial = () => localStorage.getItem("TODOS_V1") ? JSON.parse(localStorage.getItem("TODOS_V1")) : []
+
 const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useState(() => localStorage.getItem("TODOS_V1") ? JSON.parse(localStorage.getItem("TODOS_V1")) : [])
+  const [todos, setTodos] = useState(localStorageInitial)
   const [searchValue, setSearchValue] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   useEffect(() => {
     const todosFromStorage = window.localStorage.getItem('TODOS_V1')
@@ -44,6 +47,7 @@ const TodoProvider = ({ children }) => {
     const newTodos = [...todos]
     const todoIndex = newTodos.findIndex((todo) => todo.text == text)
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
     setTodos(newTodos)
   }
 
@@ -51,11 +55,16 @@ const TodoProvider = ({ children }) => {
     const newTodos = [...todos]
     const todoIndex = newTodos.findIndex((todo) => todo.text == text)
     newTodos.splice(todoIndex, 1)
+    localStorage.setItem('TODOS_V1', JSON.stringify(newTodos))
     setTodos(newTodos)
   }
 
   const inputText = (event) => {
     setSearchValue(event.target.value)
+  }
+
+  const modalOpened = () => {
+    setOpenModal(!openModal)
   }
 
   return (
@@ -73,7 +82,10 @@ const TodoProvider = ({ children }) => {
       searchedTodos,
       todoCompleted,
       todoDeleted,
-      inputText
+      inputText,
+      openModal,
+      setOpenModal,
+      modalOpened,
     }}>
       {children}
     </TodoContext.Provider>
