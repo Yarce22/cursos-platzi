@@ -4,13 +4,15 @@ import './style.css'
 import { useContext } from "react"
 
 const TodoCounter = () => {
-  const { total, completed } = useContext(TodoContext)
+  const { totalTodos, completedTodos } = useContext(TodoContext)
+
+  console.log(totalTodos)
 
   return (
     <div className="TodoCounter">
-      {(total != 0) &&
+      {(totalTodos != 0) &&
         <h1>
-          Has completado <span>{completed}</span> de <span>{total}</span> {total >= 1 ? "TODO" : "TODOs"}
+          Has completado <span>{completedTodos}</span> de <span>{totalTodos}</span> {totalTodos >= 1 ? "TODO" : "TODOs"}
         </h1>
       }
     </div>
