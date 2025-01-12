@@ -1,16 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { blogData } from "../../utils/blogdata";
 import { BlogLink } from "../BlogLink";
+import { useAuthContext } from "../../hooks";
 
 const BlogPage = () => {
+	const {auth} = useAuthContext()
+
   return (
 	<>
-		<h1>BlogPost</h1>
+		<h1>BlogPost</h1>	
 
 		<Outlet />
 
 		<ul>
-			{blogData.map((post) => (
+			{auth.blogs.map((post) => (
 				<BlogLink 
 					key={post.slug}
 					post={post}

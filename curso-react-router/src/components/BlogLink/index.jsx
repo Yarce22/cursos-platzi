@@ -11,9 +11,9 @@ const BlogLink = ({ post }) => {
 
 BlogLink.propTypes = {
   post: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
+    title: PropTypes.string,
+    slug: PropTypes.string,
+  }),
 }
 
 export { BlogLink }

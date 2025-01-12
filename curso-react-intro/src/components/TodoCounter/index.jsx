@@ -6,8 +6,6 @@ import { useContext } from "react"
 const TodoCounter = () => {
   const { totalTodos, completedTodos } = useContext(TodoContext)
 
-  console.log(totalTodos)
-
   return (
     <div className="TodoCounter">
       {(totalTodos != 0) &&

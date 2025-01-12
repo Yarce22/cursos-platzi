@@ -12,7 +12,7 @@ const ProfilePage = () => {
 	<div>
 	  <h1>Profile</h1>
 
-		<p>Welcome, {auth?.user}</p>
+		<p>Welcome, {auth?.user.username}</p>
 	</div>
   );
 };
