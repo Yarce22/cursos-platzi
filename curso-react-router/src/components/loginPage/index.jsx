@@ -1,17 +1,19 @@
 import { useState } from "react"
 import { useAuthContext } from "../../hooks"
-import { Navigate } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
 
 const LoginPage = () => {
+  const location = useLocation()
   const {auth} = useAuthContext()
   const [username, setUsername] = useState('') 
+  console.log(location)
   
   const login = (e) => {
     e.preventDefault()
     auth.login({ username })
   }
 
-  if (auth.user) {	
+  if (auth.user) {
     return <Navigate to="/profile" />;
   }
 
