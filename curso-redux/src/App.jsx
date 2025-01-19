@@ -1,27 +1,20 @@
 import PropTypes from 'prop-types'
-import { Col } from 'antd'
-import { connect } from 'react-redux'
+import { Col, Spin } from 'antd'
 import { Searcher } from './components/Searcher'
 import { PokemonList } from './components/PokemonList'
 import { useEffect } from 'react'
-import { getPokemon } from './API'
-import { setPokemons as setPokemonsActions } from './actions'
+import { useSelector, useDispatch, shallowEqual} from 'react-redux'
+import { fetchPokemonsWithDetails } from './slices/dataSlice'
 import logo from './assets/logo.svg'
 import './App.css'
 
-const App = ({pokemons, setPokemons}) => {
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      try {
-        const pokemonsRes = await getPokemon()
-        setPokemons(pokemonsRes)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+const App = () => {
+  const pokemons = useSelector(state => state.data.pokemons, shallowEqual)
+  const dispatch = useDispatch();
 
-    fetchPokemons()
-  }, [setPokemons])
+  useEffect(() => {
+    dispatch(fetchPokemonsWithDetails())
+  }, [dispatch])
 
   return (
     <div className='App'>
@@ -31,22 +24,17 @@ const App = ({pokemons, setPokemons}) => {
       <Col span={8} offset={8}>
         <Searcher />
       </Col>
+      <Col offset={12} className='loading'>
+        <Spin spinning={!pokemons.length} size='large'  />
+      </Col>
       <PokemonList pokemons={pokemons} />
     </div>
   )
 }
-
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemons,
-})
-
-const mapDispatchToProps  = (dispatch) => ({
-  setPokemons: (value) => dispatch(setPokemonsActions(value))
-})
 
 App.propTypes = {
   pokemons: PropTypes.array,
   setPokemons: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

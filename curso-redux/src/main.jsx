@@ -1,12 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { pokemonsReducer } from './reducers/pokemons.js'
 import { Provider } from 'react-redux'
-import { legacy_createStore as createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import rootReducer from './reducers/rootReducer.js'
 import App from './App.jsx'
 import './index.css'
 
-const store = createStore(pokemonsReducer)
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+});
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

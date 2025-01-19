@@ -3,14 +3,18 @@ import { PokemonCard } from "../PokemonCard"
 import './style.css'
 
 const PokemonList = ({ pokemons }) => {
-  console.log(pokemons)
+
   return(
     <div className="PokemonList">
       {pokemons.map(pokemon => (
         <PokemonCard
           key={pokemon.name}
           name={pokemon.name}
-          url={pokemon.url}
+          img={pokemon.sprites.front_default}
+          abilities={pokemon.abilities.map(ability => ability.ability.name).join(', ')}
+          types={pokemon.types.map(type => type.type.name).join(', ')}
+          id={pokemon.id}
+          favorite={pokemon.favorite}
         />
       ))}
     </div>
