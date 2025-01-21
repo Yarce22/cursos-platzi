@@ -1,0 +1,3 @@
+(() => {
+  let userID: string | number;
+})()
