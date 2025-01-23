@@ -9,8 +9,6 @@
 
   const products: Product[] = []
 
-  const defaultDate = new Date()
-
   const addProduct = (data: Product) => {
     products.push(data)
   }
