@@ -15,4 +15,3 @@ const product2 = createProduct(1)
 
 console.log(product1);
 console.log(product2);
-
