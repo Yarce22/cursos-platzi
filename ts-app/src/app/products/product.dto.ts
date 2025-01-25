@@ -6,4 +6,6 @@ import { Product } from "./product.model";
 
 export interface UpdateProductDto extends Partial<Product> {}
 
-export interface FindProductDto extends Readonly<Partial<Product>> {}
+export interface FindProductDto extends Readonly<Partial<Omit<Product, 'tags'>>> {
+  readonly tags: ReadonlyArray<string>
+}
