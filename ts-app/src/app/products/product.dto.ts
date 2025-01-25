@@ -5,3 +5,5 @@ import { Product } from "./product.model";
 }
 
 export interface UpdateProductDto extends Partial<Product> {}
+
+export interface FindProductDto extends Readonly<Partial<Product>> {}
