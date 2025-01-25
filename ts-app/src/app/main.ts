@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { addProducts, products } from "./products/product.service";
+import { addProducts, products, updateProduct } from "./products/product.service";
 
 for (let i = 0; i < 5; i++) {
   addProducts({
@@ -15,3 +15,8 @@ for (let i = 0; i < 5; i++) {
     categoryId: faker.string.uuid(),
   })
 }
+const product = products[0]
+updateProduct(product.id, {
+  title: 'New title',
+  stock: 80
+})
