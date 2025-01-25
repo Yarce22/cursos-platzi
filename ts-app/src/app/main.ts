@@ -21,7 +21,7 @@ updateProduct(product.id, {
   stock: 80
 })
 
-findProducts({
-  stock: 10,
-  color: 'red'
-})
+// findProducts({
+//   stock: 10,
+//   color: 'red'
+// })

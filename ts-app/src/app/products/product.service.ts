@@ -33,7 +33,7 @@ export const updateProduct = (id: string | number, changes: UpdateProductDto): P
 
 
 export const findProducts = (dto: FindProductDto): Product[] => {
-  dto.tags?.pop()
-  dto.tags?.push()
+  // dto.tags?.pop()
+  // dto.tags?.push()
   return products
 }
