@@ -1,13 +1,13 @@
 export class MyDate {
   constructor(
     public year: number = 1970,
-    public month: number = 1,
+    private _month: number = 1,
     private _day: number = 1,
   ) {}
 
   public printFormat(): string {
     const day = this.addPadding(this._day)
-    const month = this.addPadding(this.month)
+    const month = this.addPadding(this._month)
   return `${day}/${month}/${this.year}`
   }
 
@@ -23,7 +23,7 @@ export class MyDate {
     if (type === 'days') {
       this._day += amount
     } else if (type === 'months') {
-      this.month += amount
+      this._month += amount
     } else if (type === 'years') {
       this.year += amount
     }
@@ -38,7 +38,15 @@ export class MyDate {
     if (this.year % 100 === 0) return false
     return this.year % 4 ===0
   }
+
+  set month (newValue: number) {
+    if (newValue >= 1 && newValue <= 12) {
+      this._month = newValue
+    } else {
+      throw new Error('No se puede actualizar la fecha')
+    }
+  }
 }
 
 const myDate = new MyDate()
-console.log(myDate.day)
+myDate.month = 7
