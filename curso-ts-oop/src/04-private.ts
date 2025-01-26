@@ -3,7 +3,7 @@
 export class MyDate {
   public year: number
   public month: number
-  public day: number
+  private day: number
 
   constructor(
     year: number,
@@ -16,7 +16,17 @@ export class MyDate {
   }
 
   public printFormat(): string {
-  return `${this.day}/${this.month}/${this.year}`
+    const day = this.addPadding(this.day)
+    const month = this.addPadding(this.month)
+  return `${day}/${month}/${this.year}`
+  }
+
+  private addPadding(value: number) {
+    if (value < 10) {
+      return `0${value}`
+    } else {
+      return `${value}`
+    }
   }
 
   public add(amount: number, type: 'days' | 'months' | 'years') {
@@ -31,4 +41,3 @@ export class MyDate {
 }
 
 const myDate = new MyDate(2021, 3, 13)
-myDate.day = 12
