@@ -1,6 +1,6 @@
 export class Animal {
   constructor(
-    public name: string
+    protected name: string
   ) {}
 
   move() {
@@ -22,8 +22,12 @@ export class Dog extends Animal {
 
   woof(times: number) {
     for (let i = 0; i < times; i++) {
-      console.log('woof');
-
+      console.log(`woof ${this.name}`); // Puedo acceder a las propiedades heredadas
     }
   }
 }
+
+const fifi = new Dog('fifi', 'fifi')
+// fifi.name('otro nombre') // no puedo modificar las propiedades protegidas
+console.log(fifi.woof(1));
+
