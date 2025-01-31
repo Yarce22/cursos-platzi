@@ -1,14 +1,13 @@
 // import type {FunctionComponent, FC } from 'react'
 import Image from 'next/image'
 
-const random = (): number => Math.floor(Math.random()*123)+1
+type Props = {src: string}
 
-const RandomFox = (): React.JSX.Element => {
-  const srcImage = `https://randomfox.ca/images/${random()}.jpg`
+const RandomFox = ({ src }: Props): React.JSX.Element => {
 
   return (
     <Image
-      src={srcImage}
+      src={src}
       alt="fox-image"
       width={400}
       height={400}
