@@ -1,10 +1,19 @@
 // import type {FunctionComponent, FC } from 'react'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+import type { ImgHTMLAttributes } from 'react'
 
-type Props = {src: string}
+type LazyImageProps = {
+  src: string,
+  width: number,
+  height: number
+}
 
-const RandomFox = ({ src }: Props): React.JSX.Element => {
+type ImageNative = ImgHTMLAttributes<HTMLImageElement>
+
+type Props = LazyImageProps & ImageNative
+
+const LazyImage = ({ src, ...imgProps }: Props): React.JSX.Element => {
   const node = useRef<HTMLImageElement>(null)
   const [image, setImage] = useState('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4=')
 
@@ -31,14 +40,12 @@ const RandomFox = ({ src }: Props): React.JSX.Element => {
       ref={node}
       src={image}
       alt="fox-image"
-      width={400}
-      height={400}
-      className='bg-gray-300'
+      {...imgProps}
     />
   )
 }
 
-export { RandomFox }
+export { LazyImage }
 
 // export const RandomFoxV2: FunctionComponent = () => {
 //   return (

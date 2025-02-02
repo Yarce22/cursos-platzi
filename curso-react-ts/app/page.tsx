@@ -1,6 +1,6 @@
 // const srcImage = `https://randomfox.ca/images/${random()}.jpg`
 'use client'
-import { RandomFox } from "@/components/RandomFox";
+import { LazyImage } from "@/components/LazyImage";
 import { useEffect, useState } from "react";
 import type { MouseEventHandler } from "react";
 
@@ -41,7 +41,13 @@ export default function Home() {
         <button onClick={addNewFox}>add fox</button>
         {images.map((image) => (
           <div key={image.id} className="p-4">
-            <RandomFox src={image.src} />
+            <LazyImage 
+              src={image.src}
+              width={320}
+              height={320}
+              title="Random Fox"
+              className="rounded bg-gray-300"
+            />
           </div>
         ))}
       </main>
