@@ -6,16 +6,17 @@ import type { ImgHTMLAttributes } from 'react'
 type LazyImageProps = {
   src: string,
   width: number,
-  height: number
+  height: number,
+  onLazyLoad?: (node: HTMLImageElement | null) => void
 }
 
 type ImageNative = ImgHTMLAttributes<HTMLImageElement>
 
 type Props = LazyImageProps & ImageNative
 
-const LazyImage = ({ src, ...imgProps }: Props): React.JSX.Element => {
+const LazyImage = ({ src, onLazyLoad, ...imgProps }: Props): React.JSX.Element => {
   const node = useRef<HTMLImageElement>(null)
-  const [image, setImage] = useState('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4=')
+  const [image, setImage] = useState<string>('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4=')
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -27,13 +28,15 @@ const LazyImage = ({ src, ...imgProps }: Props): React.JSX.Element => {
     })
 
     if (node.current) {
+      if (onLazyLoad) {
+        onLazyLoad(node.current);
+      }
       observer.observe(node.current)
     }
-
     return () => {
       observer.disconnect()
     }
-  }, [src])
+  }, [src, onLazyLoad])
 
   return (
     <Image
