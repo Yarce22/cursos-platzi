@@ -1,13 +1,14 @@
 interface CategoryProps {
   params: { 
-    category: string
+    categories: string[],
+    searchParams?: string
   }
 }
 
 const Category = async (props: CategoryProps): Promise<React.JSX.Element> => {
-  const { category } = await props.params
+  const { categories } = await props.params
   return (
-    <h1>Categoría dinámica: {category}</h1>
+    <h1>Categoría dinámica: {categories}</h1>
   )
 }
 
