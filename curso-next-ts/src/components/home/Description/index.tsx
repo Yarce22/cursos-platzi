@@ -7,11 +7,14 @@ const Description = () => {
       <Image
         src="/images/description.jpeg"
         alt="products marketplace"
-        width={300}
+        width={500}
         height={300}
+        priority={false}
       />
-      <h2>Description</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos molestiae omnis corporis. Iusto aliquam nemo fugit beatae? Eos doloremque dignissimos error explicabo, odit possimus reiciendis consequuntur consectetur accusamus magnam eaque.</p>
+      <div>
+        <h2>Description</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos molestiae omnis corporis. Iusto aliquam nemo fugit beatae? Eos doloremque dignissimos error explicabo, odit possimus reiciendis consequuntur consectetur accusamus magnam eaque.</p>
+      </div>
     </section>
   )
 }
