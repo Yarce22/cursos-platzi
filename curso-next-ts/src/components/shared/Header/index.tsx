@@ -1,8 +1,9 @@
 import Link from "next/link"
+import style from "./style.module.css"
 
 const Header = () => {
   return (
-    <header>
+    <header className={style.Header}>
       <nav>
         <ul>
           <Link href="/">
