@@ -1,0 +1,8 @@
+@import "_variables.css";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-primary);
+  color: var(--text-color);
+}
