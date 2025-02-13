@@ -1,9 +1,13 @@
 import { Input } from 'antd';
 
-const Searcher = () => {
+const Searcher = ({ searchValue, inputText }) => {
   return (
     <>
-      <Input.Search placeholder='Buscar Pokemon' />
+      <Input.Search
+        value={searchValue}
+        onChange={inputText}
+        placeholder='Buscar Pokemon'
+      />
     </>
   )
 }

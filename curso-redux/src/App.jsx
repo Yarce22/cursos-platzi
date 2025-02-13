@@ -22,7 +22,9 @@ const App = () => {
         <img src={logo} alt="logo-pokedux" />
       </Col>
       <Col span={8} offset={8}>
-        <Searcher />
+        <Searcher
+          pokemons={pokemons}
+        />
       </Col>
       <Col offset={12} className='loading'>
         <Spin spinning={!pokemons.length} size='large'  />

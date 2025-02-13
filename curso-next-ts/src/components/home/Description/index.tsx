@@ -9,7 +9,8 @@ const Description = () => {
           src="/images/description.jpeg"
           alt="products marketplace"
           priority={false}
-          fill
+          fill={true}
+          sizes="(max-width: 375px) 100hv, (max-width: 768px) 50vw, 33vw"
         />
       </div>
       <div>
