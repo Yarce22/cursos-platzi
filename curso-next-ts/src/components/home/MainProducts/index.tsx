@@ -1,5 +1,6 @@
 import Image from "next/image"
 import styles from "./MainProducts.module.css"
+import { getProducts } from "app/services/shopify";
 
 interface Product {
   id: number;
@@ -77,20 +78,6 @@ interface Product {
     src: string;
     variant_ids: number[];
   };
-}
-
-const getProducts = async () => {
-  try {
-    const res = await fetch(`${process.env.SHOPIFY_HOSTNAME}/admin/api/2025-01/products.json`, {
-      headers: new Headers({
-        'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || ""
-      })
-    })
-    const data = await res.json()
-    return data.products
-  } catch (error) {
-    console.error(error)
-  }
 }
 
 const MainProducts = async () => {
