@@ -1,3 +1,6 @@
+import { getProducts } from 'app/services/shopify/products'
+import ProductWrapped from '../../../components/Store/ProductWrapper/ProductWrapper'
+
 interface CategoryProps {
   params: { 
     categories: string[],
@@ -6,9 +9,10 @@ interface CategoryProps {
 }
 
 const Category = async (props: CategoryProps): Promise<React.JSX.Element> => {
-  const { categories } = await props.params
+  const products = await getProducts()
+  const { categories } = props.params
   return (
-    <h1>Categoría dinámica: {categories}</h1>
+    <ProductWrapped products={products} />
   )
 }
 
