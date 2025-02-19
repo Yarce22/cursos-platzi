@@ -8,3 +8,4 @@ export const RenderProps2 = () => {
     </div>
   );
 };
+ 
