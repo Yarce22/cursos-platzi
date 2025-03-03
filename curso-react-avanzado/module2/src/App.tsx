@@ -1,32 +1,46 @@
+import { Suspense } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
+import { Product } from './components/Products'
+import { Home } from './components/Home'
+import { About } from './components/About'
+import { Dashboard } from './components/Dashboard'
+import { Overview } from './components/Overview'
+import { Settings } from './components/Settings'
 import './App.css'
 
 function App() {
 
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+        </ul>
+      </nav>
 
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/About" element={<About />}></Route>
+        <Route path="/product/:id" element={<Product />}></Route>
+        <Route path="/dashboard/*" element={<Dashboard />}>
+          <Route path="overview" element={<Overview />}></Route>
+          <Route path="settings" element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Settings />
+            </Suspense>
+          }></Route>
+        </Route>
       </Routes>
     </div>
   )
 }
-
-const Home = () => {
-  return <h2>Home</h2>
-}
-
-const About = () => {
-  return <h2>About</h2>
-}
-
 
 export default App
