@@ -22,7 +22,7 @@ const HomePage = ({ productList }: { productList: TProduct[] }) => {
     <Layout>
       <KawaiiHeader />
       <section>
-        <Link href="/yes-or-no">
+        <Link href="/yes-or-no" legacyBehavior>
           <a>¿Deberia comer un avo hoy?</a>
         </Link>
       </section>
@@ -34,7 +34,7 @@ const HomePage = ({ productList }: { productList: TProduct[] }) => {
         }
       `}</style>
     </Layout>
-  )
+  );
 }
 
 export default HomePage

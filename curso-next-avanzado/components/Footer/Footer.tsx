@@ -19,7 +19,7 @@ const Footer = () => (
             <Header as="h4" content="Nosotros" />
             <List>
               <List.Item>
-                <Link href="/about">
+                <Link href="/about" legacyBehavior>
                   <a>Conoce más</a>
                 </Link>
               </List.Item>
@@ -29,7 +29,7 @@ const Footer = () => (
             <Header as="h4" content="Servicios" />
             <List>
               <List.Item>
-                <Link href="/">
+                <Link href="/" legacyBehavior>
                   <a>Todos los productos</a>
                 </Link>
               </List.Item>

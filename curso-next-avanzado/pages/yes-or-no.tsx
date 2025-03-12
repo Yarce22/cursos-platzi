@@ -61,12 +61,11 @@ const YesOrNo = ({ initialResult }: { initialResult: string }) => {
           </Button>
         </p>
         <p>
-          <Link href="/">
+          <Link href="/" legacyBehavior>
             <a className="ui black button basic">Volver al inicio</a>
           </Link>
         </p>
       </div>
-
       <style jsx>{`
         div {
           text-align: center;
@@ -77,7 +76,7 @@ const YesOrNo = ({ initialResult }: { initialResult: string }) => {
         }
       `}</style>
     </Layout>
-  )
+  );
 }
 
 export default YesOrNo

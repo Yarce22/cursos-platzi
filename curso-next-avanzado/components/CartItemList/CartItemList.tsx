@@ -35,7 +35,7 @@ const CartItemList = ({
         header: (
           <Item.Header>
             <Link href={`/product/${id}/`}>
-              <a>{name}</a>
+              {name}
             </Link>
           </Item.Header>
         ),
@@ -57,7 +57,7 @@ const CartItemList = ({
             onClick={() => removeFromCart(cartItem)}
           />
         ),
-      }
+      };
     })
 
   return <Item.Group divided items={mapCartItemsToItems(items)} as="section" />
