@@ -11,7 +11,6 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "prepare": "husky install",
     "pre-commit": "yarn pretty-quick --staged",
     "pre-push": "yarn type-check"
   },
@@ -19,11 +18,11 @@
     "@types/cors": "2.x",
     "cors": "2.x",
     "isomorphic-unfetch": "3.x",
-    "next": "13",
+    "next": "^15.2.2",
     "react": "18",
     "react-dom": "18",
     "semantic-ui-css": "2.x",
-    "semantic-ui-react": "2.x"
+    "semantic-ui-react": "^2.1.5"
   },
   "devDependencies": {
     "@types/node": "16.x",
