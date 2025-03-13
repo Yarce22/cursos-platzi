@@ -12,12 +12,7 @@ interface LoginFormData {
 
 const mockSuperAdmin = {
   username: "superadmin@example.com",
-  password: "superadmin123!",
-};
-
-const mockVisualuizer = {
-  username: "visualizer1@example.com",
-  password: "vis1pass456@",
+  password: "superAdmin123!",
 };
 
 export const Login: React.FC = () => {
