@@ -12,9 +12,9 @@ describe("<Contador />", () => {
   it("Deberia incrementar el contador", async () => {
     render(<Contador />)
     const boton = screen.getByText('Incrementar')
-    await act(() => [
+    await act(() => {
       fireEvent.click(boton)
-    ])
+    })
     const contador = screen.getByText("Contador: 1")
     expect(contador).toBeInTheDocument()
   })
