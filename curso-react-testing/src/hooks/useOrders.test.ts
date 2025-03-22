@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, Mock } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react-hooks";
+import { renderHook, waitFor } from "@testing-library/react";
 import { getOrders} from "../services/getOrders";
 import { useSession } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
