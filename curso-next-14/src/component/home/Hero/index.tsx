@@ -1,9 +1,10 @@
-import style from "./Hero.module.css"
+import style from "./Hero.module.sass"
 
 export const Hero: React.FC = () => {
   return (
     <section className={style.Hero}>
-      <h1>Hero</h1>
+      <h1>Future World</h1>
+      <h2>Empowering Your Tomorrow, Today!</h2>
     </section>
   )
 }
