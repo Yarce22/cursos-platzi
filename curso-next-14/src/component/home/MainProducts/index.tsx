@@ -4,6 +4,7 @@ import type { Product } from 'app/types'
 import styles from './MainProducts.module.sass'
 
 export const MainProducts = async () => {
+  const res = await fetch('http://localhost:3000/api/')
   const { products } = await getProducts()
 
   return (
