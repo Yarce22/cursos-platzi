@@ -37,3 +37,7 @@ next-env.d.ts
 
 # variables de entorno
 .env
+
+# typings
+/src/types/*.d.ts
+/src/types/*.ts

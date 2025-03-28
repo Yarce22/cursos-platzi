@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { getProducts } from 'app/services/shopify'
+import { getProducts } from 'app/services/shopify/products'
 import type { Product } from 'app/types'
 import styles from './MainProducts.module.sass'
 
