@@ -1,29 +1,23 @@
 import { getCollections } from "app/services/shopify/collections"
 import Link from "next/link"
+import styles from './StoreLayout.module.sass'
 
-interface CollectionProps {
-  id: number,
-  title: string,
-  handle: string
-}
-
-export default async function Layout ({ children }: { children: React.ReactNode } ) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   const collections = await getCollections()
-  console.log("collections desde el layout", collections)
 
   return (
-    <main>
+    <main className={styles.StoreLayout}>
+      <h1>Explore</h1>
       <nav>
-        {
-          collections?.map((collection: CollectionProps) => (
-            <Link
-              key={collection.id}
-              href={collection.handle}
-            >
-              {collection.title}
-            </Link>
-          ))
-        }
+        <ul className={styles.StoreLayout__list}>
+          {
+            collections.map((collection: Collection) => (
+              <Link key={collection.id} href={'/store/' + collection.handle} className={styles.StoreLayout__chip}>
+                {collection.title}
+              </Link>
+            ))
+          }
+        </ul>
       </nav>
       {children}
     </main>

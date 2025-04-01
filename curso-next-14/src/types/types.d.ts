@@ -34,3 +34,9 @@ interface CollectionRule {
   relation: string;
   condition: string;
 }
+
+interface Collection {
+  id: number,
+  title: string,
+  handle: string
+}

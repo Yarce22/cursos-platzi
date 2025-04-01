@@ -8,8 +8,8 @@ export const getProducts = async () => {
         "X-Shopify-Access-Token": env.SHOPIFY_TOKEN,
       })
     })
-    const data = await res.json()
-    return data
+    const {  products } = await res.json()
+    return products
 } catch (error) {
     console.log(error)
   }
