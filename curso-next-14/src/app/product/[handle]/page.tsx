@@ -1,7 +1,6 @@
 import { ProductView } from "app/component/product/ProductView/ProductView";
 import { getProducts } from "app/services/shopify/products";
 import { redirect } from "next/navigation";
-import { title } from "process";
 
 
 interface ProductPageProps {

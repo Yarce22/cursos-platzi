@@ -12,6 +12,7 @@ type ProductType = {
   quantity: number;
   handle: string;
   tags: string;
+  gql_id: string;
 };
 
 interface ShopifyCollection {
@@ -39,4 +40,13 @@ interface Collection {
   id: number,
   title: string,
   handle: string
+}
+
+type CartItem = {
+  title: string;
+  price: number;
+  quantity: number;
+  id: string;
+  image: string;
+  merchandiseId: string;
 }

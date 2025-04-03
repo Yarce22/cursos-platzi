@@ -19,7 +19,6 @@ export const getCollections = async () => {
     })
     return transformedCollections
 } catch (error) {
-    console.log(error)
   }
 }
 
@@ -33,6 +32,5 @@ export const getCollectionProducts = async (id: string) => {
     const { products } = await res.json()
     return products
   } catch (error) {
-    console.log(error)
   }
 }
