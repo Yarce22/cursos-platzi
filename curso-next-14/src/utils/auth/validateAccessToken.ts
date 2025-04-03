@@ -4,9 +4,10 @@ import { cookies } from 'next/headers';
 
 export const validateAccessToken = async () => {
   const cookieStore = cookies();
-  const accessToken = cookieStore.get('accessToken')?.value;
-  const grapqlClient = await GraphQLClientSingleton.getInstance().getClient();
-  const { customer } = await grapqlClient.request(customerName, {
+  const accessToken = cookieStore.get('accessToken')?.value || undefined;
+  console.log({ accessToken })
+  const graphqlClient = await GraphQLClientSingleton.getInstance().getClient();
+  const { customer } = await graphqlClient.request(customerName, {
     customerAccessToken: accessToken,
   })
 

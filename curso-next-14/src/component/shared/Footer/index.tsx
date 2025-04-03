@@ -1,7 +1,9 @@
-export const Footer: React.FC = () => {
-  return (
-    <footer>
-      <p>Future World</p>
+import styles from './Footer.module.sass';
+
+export const Footer = () => {
+  return(
+    <footer className={styles.Footer}>
+      <p>Future World © {new Date().getFullYear()}</p>
     </footer>
   )
-}
+};
