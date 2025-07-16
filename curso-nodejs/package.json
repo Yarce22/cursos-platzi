@@ -1,0 +1,20 @@
+{
+  "name": "curso-nodejs",
+  "version": "1.0.0",
+  "description": "Una utilidad para manejar fechas en formato timestamp y LongTime.",
+  "license": "MIT",
+  "author": "Yarce22 <alejomira96@gmail.com",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "date",
+    "nodejs"
+  ],
+  "dependencies": {
+    "@deepgram/sdk": "^4.7.0",
+    "cross-fetch": "^4.1.0"
+  }
+}
